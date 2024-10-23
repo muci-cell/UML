@@ -1,0 +1,17 @@
+@startuml TicketSold
+
+package "TicketSold Module" {
+    ' 抽象部件类，所有部件类的父类
+    class Component{
+        ' 初始化部件
+        init() :void
+
+        ' 自检
+        doSeltTest() :void
+    }
+    ' 抽象键盘类
+    class Keyboard{
+        getSelectedKey()
+    }
+
+}
