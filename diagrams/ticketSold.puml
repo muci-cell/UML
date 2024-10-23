@@ -1,17 +1,34 @@
-@startuml TicketSold
+@startuml
 
-package "TicketSold Module" {
-    ' 抽象部件类，所有部件类的父类
-    class Component{
-        ' 初始化部件
-        init() :void
 
-        ' 自检
-        doSeltTest() :void
-    }
-    ' 抽象键盘类
-    class Keyboard{
-        getSelectedKey()
-    }
-
+abstract class Abstraction {
+    -Bridge bridge
+    +Abstraction(Bridge bridge)
+    +operation()
 }
+
+
+interface Bridge {
+    +implementor()
+}
+
+
+class ConcreteImplementorA implements Bridge {
+    +implementor() : void
+}
+
+
+class ConcreteImplementorB implements Bridge {
+    +implementor() : void
+}
+
+
+class RefinedAbstraction extends Abstraction {
+    +operation() : void
+}
+
+
+
+Abstraction --> Bridge
+
+@enduml
