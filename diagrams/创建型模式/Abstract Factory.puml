@@ -1,0 +1,84 @@
+@startuml AbstractFactory
+package "Abstract Factory" {
+    ' 提供一个接口来创建一系列相关或相互依赖的对象，并且无须指定它们的具体类。
+    ' 抽象工厂接口
+    interface FurnitureFactory {
+        +createChair() : Chair 
+        +createTable() : Table
+    }
+
+    ' 抽象产品接口
+    interface Chair {
+        +sit():void
+    }
+
+    interface Table {
+        +dine():void 
+    }
+
+    ' 具体工厂 - Modern 风格
+    class ModernFurnitureFactory implements FurnitureFactory {
+        +createChair():Chair
+        +createTable():Table 
+    }
+
+    ' 具体工厂 - Victorian 风格
+    class VictorianFurnitureFactory implements FurnitureFactory {
+        +createChair():Chair
+        +createTable():Table 
+    }
+
+    ' 具体产品 - Modern 风格
+    class ModernChair implements Chair {
+        +sit():void
+    }
+
+    class ModernTable implements Table {
+        +dine():void 
+    }
+
+    ' 具体产品 - Victorian 风格
+    class VictorianChair implements Chair {
+        +sit():void
+    }
+
+    class VictorianTable implements Table {
+        +dine():void 
+    }
+
+    ' 客户端使用抽象工厂
+    class Client {
+        +factory:FurnitureFactory
+        +chair:Chair 
+        +table:Table 
+        +Client(FurnitureFactory factory):Client
+        +useFurniture():void
+    }
+
+    note right of Client::Client
+    ...
+    this.factory = factory
+    this.chair = factory.createChair()
+    this.table = factory.createTable()
+    ...
+    end note
+    
+    note right of Client::useFurniture
+    ...
+    chair.sit()
+    table.dine()
+    ...
+    end note
+
+    ' Client 与工厂和产品的关系 （关联 client持有对抽象接口的引用 没有所有权所以不是聚合或组合）
+    Client --> FurnitureFactory
+    Client --> Chair
+    Client --> Table
+
+    ' 表示具体工厂依赖于具体产品 （不持有引用 局部使用）
+    ModernFurnitureFactory ..> ModernChair : <<create>>
+    ModernFurnitureFactory ..> ModernTable : <<create>>
+    VictorianFurnitureFactory ..> VictorianChair : <<create>>
+    VictorianFurnitureFactory ..> VictorianTable : <<create>>
+}
+

@@ -1,0 +1,51 @@
+@startuml PrototypePattern
+package "Prototype Pattern"{
+    interface Prototype {
+        + clone(): Prototype
+    }
+
+    class ConcretePrototypeA implements Prototype {
+        - String fieldA
+        + ConcretePrototypeA(String fieldA)
+        + clone(): Prototype
+    }
+
+    class ConcretePrototypeB implements Prototype {
+        - String fieldB
+        + ConcretePrototypeB(String fieldB)
+        + clone(): Prototype
+    }
+
+    class Client {
+        - Prototype prototypeA
+        - Prototype prototypeB
+        + main()
+    }
+
+    Client --> ConcretePrototypeA
+    Client --> ConcretePrototypeB
+
+
+    note right of Client::main
+    prototypeA = new ConcretePrototypeA("Prototype A")
+    prototypeB = new ConcretePrototypeB("Prototype B")
+
+    Prototype cloneA = prototypeA.clone()
+    Prototype cloneB = prototypeB.clone()
+    end note
+
+    note right of ConcretePrototypeA::ConcretePrototypeA
+    + ConcretePrototypeA(String fieldA) {
+        this.fieldA = fieldA
+    }
+    end note
+
+    note left of ConcretePrototypeB::ConcretePrototypeB
+    + ConcretePrototypeB(String fieldB) {
+        this.fieldB = fieldB
+    }
+    end note
+
+}
+
+

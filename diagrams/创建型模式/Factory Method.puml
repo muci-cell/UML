@@ -1,0 +1,25 @@
+@startuml FactoryMethod
+
+package "Factory Method" {
+    ' 产品接口
+    interface Product{
+
+    }
+
+    ' 工厂(创建者)接口
+    interface Creator{
+
+    }
+
+    ' 实现产品
+    class ConcreteProduct implements Product{
+
+    }
+
+    ' 实现工厂
+    class ConcreteCreator implements Creator{
+
+    }
+
+    ConcreteCreator..>ConcreteProduct
+}

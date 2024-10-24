@@ -1,0 +1,15 @@
+@startuml t
+package "t"{
+    ' Cipher.createCipher()   使得Cipher不仅是"抽象产品类" 还是一个 "工厂类" --工厂方法
+    abstract class Cipher{
+        +encrypt()
+        +static createCipher() : Cipher
+    }
+    class SubCipherA extends Cipher{
+        +encrypt()
+    }
+    class SubCipherB extends Cipher{
+        +encrypt()
+    }
+
+}

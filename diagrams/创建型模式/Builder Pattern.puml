@@ -1,0 +1,72 @@
+@startuml BuilderPattern
+package "Builder Pattern" {
+    ' 表示最终构建的复杂对象
+    class Product {
+        - partA:String
+        - partB:String
+        - partC:String
+        + setPartA(String partA):void
+        + setPartB(String partB):void
+        + setPartC(String partC):void
+    }
+    ' 定义"创建对象的步骤"，通常是接口或抽象类。不同的具体建造者可以提供不同的实现。
+    interface Builder {
+        + buildPartA(): void
+        + buildPartB(): void
+        + buildPartC(): void
+        + getResult(): Product
+    }
+    ' 具体建造者类 实现 Builder 接口 
+    class ConcreteBuilder1 implements Builder {
+        - product:Product
+
+        ' 构建方法a
+        + buildPartA()
+        + buildPartB()
+        + buildPartC()
+
+        ' 返回产品
+        + getResult(): Product
+    }
+
+    note right of ConcreteBuilder1::buildPartA
+    ...
+    product.setPartA("Part A1")
+    ...
+    end note
+    
+    class ConcreteBuilder2 implements Builder {
+        - product:Product
+        + buildPartA()
+        + buildPartB()
+        + buildPartC()
+        + getResult(): Product
+    }
+
+    '指挥建造过程
+    class Director {
+        - builder:Builder
+        + setBuilder(Builder b)
+        + construct()
+    }
+
+    note right of Director::construct
+    ...
+    builder.buildPartA()
+    builder.buildPartB()
+    builder.buildPartC()
+    ...
+    end note
+
+    ' 通过 Director 来构造对象
+    class Client {
+        +main()
+    }
+    ' client依赖于指挥
+    Client .> Director: directs 
+    ' 关联 
+    Director --> Builder: builds product
+    ConcreteBuilder1 --> Product
+    ConcreteBuilder2 --> Product
+
+}
