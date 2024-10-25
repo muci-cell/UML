@@ -1,0 +1,28 @@
+@startuml Proxy Pattern
+package "ProxyPattern"{
+    ' 定义图片接口，它有一个 display 方法。
+    interface Image {
+        + display(): void
+    }
+
+    ' 这是实际的图片类，它实现了 Image 接口，包含从磁盘加载图片的逻辑。
+    class RealImage implements Image {
+        + RealImage(fileName: String)
+        + display(): void
+        + loadFromDisk(fileName: String): void
+    }
+
+    ' 这是图片的代理类，同样实现了 Image 接口，但只在真正需要的时候才创建 RealImage 实例。
+    class ImageProxy implements Image {
+        ' 这个image其实就是要传入真实的图片
+        ' 也可以直接关联对象RealImage 是一样的效果
+        - image: Image
+        + ImageProxy(fileName: String)
+        + display(): void
+    }
+
+    ImageProxy o-- Image : aggregates
+}
+
+
+

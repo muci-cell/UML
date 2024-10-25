@@ -1,0 +1,40 @@
+@startuml Smart Proxy Pattern
+package "SmartProxyPattern" {
+
+    ' 定义图片接口，它有一个 display 方法。
+    interface Image {
+        + display(): void
+    }
+
+    ' 这是实际的图片类，它实现了 Image 接口，包含从磁盘加载图片的逻辑。
+    class RealImage implements Image {
+        + RealImage(fileName: String)
+        + display(): void
+        + loadFromDisk(fileName: String): void
+    }
+
+    ' 这是图片的智能代理类，除了代理 RealImage，还包含缓存和延迟加载的逻辑。
+    class SmartImageProxy implements Image {
+        - realImage: RealImage
+        - fileName: String
+        - isLoaded: boolean
+        + SmartImageProxy(fileName: String)
+        + display(): void
+        + loadImageIfNecessary(): void
+         ' 缓存的逻辑
+        + cacheImage(): void 
+    }
+
+    ' 关联关系：SmartImageProxy 管理 RealImage 的生命周期，并控制其访问。
+    SmartImageProxy o-- RealImage : manages
+    
+    note right of SmartImageProxy
+      - 延迟加载 (Lazy Loading): 
+        仅在需要时才创建 RealImage 实例
+      - 缓存 (Caching):
+        确保 RealImage 被创建后，不重复加载
+    end note
+    
+    ' Image 接口被代理类和真实类实现
+}
+@enduml

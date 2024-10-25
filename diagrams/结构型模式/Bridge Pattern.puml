@@ -1,0 +1,28 @@
+@startuml
+' 桥接模式可以让RefinedAbstraction切换不同的接口实现 比较
+interface Implementor {
+    + operationImpl(): void
+}
+
+class ConcreteImplementorA implements Implementor {
+    + operationImpl(): void
+}
+
+class ConcreteImplementorB implements Implementor {
+    + operationImpl(): void
+}
+
+abstract class Abstraction {
+    - implementor: Implementor
+    + Abstraction(Implementor implementor)
+    + operation(): void
+}
+
+class RefinedAbstraction extends Abstraction {
+    + operation(): void
+}
+
+Abstraction o-- Implementor : 聚合
+
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+class Facade {
+    + operation(): void
+}
+
+class SubsystemA {
+    + operationA(): void
+}
+
+class SubsystemB {
+    + operationB(): void
+}
+
+class SubsystemC {
+    + operationC(): void
+}
+
+Facade o-- SubsystemA : uses
+Facade o-- SubsystemB : uses
+Facade o-- SubsystemC : uses
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+interface Target {
+    + request(): void
+}
+
+class Adaptee {
+    + specificRequest(): void
+}
+
+class Adapter extends Adaptee implements Target {
+    + request(): void
+}
+' 适合需要对被适配者类进行扩展或修改的情况。
+' Adapter 继承了 Adaptee，因此只能适配一个 Adaptee 类。
+
+@enduml

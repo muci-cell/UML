@@ -1,0 +1,39 @@
+@startuml Component
+package "Component"{
+    abstract Component {
+        - id:String
+        - name:String
+        - parentId:String
+        - createTime:Date
+        + getName():String
+        + setName(String name):void
+        + getId():String
+        + setId(String Id):void
+        + getParentId():String
+        + setParentId(String Id):void
+        + getCreateTime():Date
+        + setCreateTime(Date date):void
+    }
+
+    class FileInfo extends Component {
+        - content:String
+        + getContent():String
+        + setContent(String content):void
+    }
+
+
+    
+    class FolderInfoVO extends Component {
+        - childFolderNodes: List<Component>
+        - childFile:List<Component>
+        + getChildFolderNodes(): List<Component>
+        + setChildFolderNodes(List<Component> childFolderNodes): void
+        + getChildFileList():List<Component>
+        + setChildFileList(List<Component> childFileList):void
+    }
+
+    FolderInfoVO o-- Component : contains
+
+}
+
+

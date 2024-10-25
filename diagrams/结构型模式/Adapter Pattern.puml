@@ -1,0 +1,34 @@
+@startuml
+' 这是一个对象适配器
+' Adapter 可以适配多个不同的 Adaptee 实例，甚至在运行时可以动态改变被适配者。
+' 组合优于继承
+' 松耦合：对象适配器与 Adaptee 之间是松耦合的，任何对 Adaptee 的修改或继承结构的变化都不会直接影响到 Adapter，使得对象适配器更容易维护和扩展。
+' 适配多个类：对象适配器可以轻松地适配多个不同的 Adaptee 类，因为它并不依赖继承。一个 Adapter 可以持有多个不同类型的 Adaptee 实例，通过不同的逻辑实现适配。
+
+class Client{
+    + useRequest():void
+}
+
+interface Target {
+    + request(): void
+}
+
+' 特殊请求
+class Adaptee {
+    + specificRequest(): void
+}
+' 普通请求
+class Request implements Target{
+    + request(): void
+}
+' 适配器实现目标接口，持有特殊请求的引用
+class Adapter implements Target {
+    - adaptee: Adaptee
+    + Adapter(Adaptee adaptee)
+    + request(): void
+}
+
+
+Adapter --> Adaptee : 关联
+Client --> Target
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+interface Flyweight {
+    + operation(extrinsicState: String): void
+}
+
+class ConcreteFlyweight implements Flyweight {
+    + operation(extrinsicState: String): void
+}
+
+' 多个客户端可以共享相同的享元对象
+' 享元工厂最好使用单例模式实现。
+class FlyweightFactory {
+    - flyweights: Map<String, Flyweight>
+    + getFlyweight(key: String): Flyweight
+}
+
+FlyweightFactory o-- Flyweight : "creates"
+
+
+@enduml
