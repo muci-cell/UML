@@ -1,0 +1,25 @@
+@startuml
+' 备忘录
+class Originator {
+    -state: String
+    +setState(state: String): void
+    +getState(): String
+    +createMemento(): Memento
+    +restoreMemento(memento: Memento): void
+}
+
+class Memento {
+    -state: String
+    +getState(): String
+}
+
+class Caretaker {
+    -memento: Memento
+    +saveMemento(memento: Memento): void
+    +getMemento(): Memento
+}
+
+Originator ..> Memento : creates
+Caretaker o-- Memento : manages
+
+@enduml

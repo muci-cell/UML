@@ -1,0 +1,27 @@
+@startuml
+title Chain of Responsibility Pattern
+
+' 多个对象可以处理一个请求，但具体由哪个对象处理请求在运行时自动确定
+' 可动态指定一组对象处理请求，或添加新的处理者
+' 需要在不明确指定请求处理者的情况下，向多个处理者中的一个提交请求
+abstract class BaseHandler  {
+    - nextHandler: Handler
+    + setNext(handler: Handler): void
+    + handleRequest(request: Request): void
+}
+
+class ConcreteHandler1 extends BaseHandler {
+    + handleRequest(request: Request): void
+}
+
+class ConcreteHandler2 extends BaseHandler {
+    + handleRequest(request: Request): void
+}
+
+class ConcreteHandler3 extends BaseHandler {
+    + handleRequest(request: Request): void
+}
+
+note right of BaseHandler : BaseHandler handles request if it can\notherwise, it forwards to next handler
+BaseHandler --o BaseHandler
+@enduml

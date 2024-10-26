@@ -1,0 +1,46 @@
+@startuml
+interface Command {
+    ' 执行命令
+    + execute():void
+    
+    '撤销命令
+    + undo():void
+}
+
+class ConcreteCommand1 implements Command {
+    - receiver : ReceiverA
+    ' 执行命令
+    + execute():void
+    
+    '撤销命令
+    + undo():void
+}
+class ReceiverA{
+    + action():void
+}
+
+class ConcreteCommand2 implements Command {
+    - receiver : ReceiverB
+    ' 执行命令
+    + execute():void
+    
+    '撤销命令
+    + undo():void
+}
+class ReceiverB{
+    + action():void
+}
+
+' 这是一个调用者 invoker
+class Invoker {
+    - command:Command
+    
+    + setCommand(cmd: Command) : void
+    
+    + call() : void
+}
+
+Invoker o-- Command : 聚合
+ReceiverA --o ConcreteCommand1
+ReceiverB --o ConcreteCommand2
+@enduml

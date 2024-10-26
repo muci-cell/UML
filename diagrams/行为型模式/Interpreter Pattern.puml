@@ -1,0 +1,25 @@
+@startuml
+class Context {
+    - exp1:Expression
+    + Context():void
+    + operation(String info):void
+}
+
+interface Expression {
+    + interpret(String info): object
+}
+
+class TerminalExpression implements Expression {
+    + interpret(String info): object
+}
+
+class NonTerminalExpression implements Expression {
+    - exp1:Expression
+    - exp2:Expression
+    + interpret(String info): object
+}
+
+Context o-- Expression : 聚合
+NonTerminalExpression o-- Expression : 聚合
+
+@enduml

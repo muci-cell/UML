@@ -1,0 +1,24 @@
+@startuml
+' 抽象类，定义模板方法以及若干抽象方法，模板方法的每一步可由子类实现。
+abstract class AbstractClass {
+    +templateMethod(): void
+    #primitiveOperation1(): void
+    #primitiveOperation2(): void
+}
+
+class ConcreteClassA {
+    #primitiveOperation1(): void
+    #primitiveOperation2(): void
+}
+
+class ConcreteClassB {
+    #primitiveOperation1(): void
+    #primitiveOperation2(): void
+}
+
+AbstractClass <|-- ConcreteClassA
+AbstractClass <|-- ConcreteClassB
+
+
+
+@enduml

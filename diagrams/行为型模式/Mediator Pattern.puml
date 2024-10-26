@@ -1,0 +1,39 @@
+@startuml
+' 使得两个ConcreteColleague解耦合 当使用send时 调用ConcreteMediator
+' relay函数转发消息调用其他ConcreteColleague接收 
+' 中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互
+' 中介 
+interface Mediator{
+    ' 注册
+    + register(Colleague colleague):void 
+
+    '转发
+    + relay(Colleague colleague):void
+}
+
+class Colleague{
+    - mediator Mediator
+    + setMediator(Mediator mediator)
+    + send():void
+    + receive():void
+}
+
+class ConcreteMediator implements Mediator{
+    - colleagues :List<Colleague>
+     ' 注册
+    + register(Colleague colleague):void 
+
+    '转发
+    + relay(Colleague colleague):void
+}   
+class ConcreteColleague1 implements Colleague{
+    + send():void
+    + receive():void
+}
+class ConcreteColleague2 implements Colleague{
+    + send():void
+    + receive():void
+}
+Mediator --o Colleague
+Colleague --o ConcreteMediator
+@enduml

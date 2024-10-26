@@ -1,0 +1,30 @@
+@startuml
+' 抽象聚合
+interface Aggregate{
+    + add():Object 
+    + remove():Object
+    + getIterator():Iterator
+}
+class ConcreteAggregate implements Aggregate{
+    - list :List<Object>
+    + add():Object 
+    + remove():Object
+    + getIterator():Iterator
+}
+
+interface Iterator{
+    + first():Object
+    + next():Object
+    + hasNext():boolean
+
+}
+
+class ConcreteIterator implements Iterator{
+    - list :List<Object>
+    - ConcreteIterator(List<Object> list)
+    + first():Object
+    + next():Object
+    + hasNext():boolean
+}
+ConcreteIterator --> ConcreteAggregate
+@enduml

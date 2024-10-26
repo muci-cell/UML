@@ -1,0 +1,27 @@
+@startuml
+abstract Subject {
+    - observers:List<Observer>
+    +attach(observer: Observer): void
+    +detach(observer: Observer): void
+    +notify(): void
+}
+
+interface Observer {
+    +response(): void
+}
+
+class ConcreteSubject extends Subject{
+    +notify(): void
+}
+
+
+
+Subject o-- Observer
+
+class ConcreteObserver1 implements Observer{
+    +response(): void
+}
+class ConcreteObserver2 implements Observer{
+    +response(): void
+}
+@enduml
